@@ -2,6 +2,7 @@ model\horarioAsignado\asigHorarioVo.class
 controller\horarioAsigController.class
 model\horarioRegistrado\horarioReVo.class
 model\horarioAsignado\asigHorarioDao.class
+controller\login.class
 model\horarioRegistrado\horarioReDao.class
 controller\empleadoController.class
 model\soporte\soporteVo.class
@@ -9,6 +10,7 @@ model\empleado\empleadoDao.class
 controller\soporteController.class
 model\soporte\soporteDao.class
 model\login\loginVo.class
+controller\logout.class
 controller\horarioReController.class
 model\Conexion.class
 model\empleado\empleadoVo.class

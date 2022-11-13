@@ -30,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="views/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
@@ -189,10 +190,9 @@
                 </div>
               </div>
               <br>
-                <table class="table">
+                <table class="table" id="example">
                   <thead>
                     <tr>
-                      <th>Id</th>
                       <th>Fecha de Registro</th>
                       <th>Hora Entrada</th>
                       <th>Salida almuerzo</th>
@@ -203,11 +203,8 @@
                   </tr>
                   </thead>
                   <tbody id="mostrar">
-                    <c:forEach var="horarioRList" items="${listar}">
-
-                        
+                    <c:forEach var="horarioRList" items="${listar}">               
                     <tr>
-                      <td>${horarioRList.getIdHorarioRegistrado()}</td>
                       <td>${horarioRList.getFechaRegistro()}</td>
                       <td>${horarioRList.getHoraEntradaRegistrada()}</td>
                       <td>${horarioRList.getHoraInicioAlmuerzo()}</td>
@@ -276,6 +273,13 @@
   <!-- Template Main JS File -->
   <script src="views/assets/js/main.js"></script>
   <script src="views/assets/js/horarioRegistrado.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+
+  <script src="views/assets/js/datatable.js"></script>
+
 
 </body>
 

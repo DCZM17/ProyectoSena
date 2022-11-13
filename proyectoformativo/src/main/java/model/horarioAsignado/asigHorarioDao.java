@@ -122,10 +122,10 @@ public class asigHorarioDao {
             con=Conexion.conectar(); //abrir conexión
             ps=con.prepareStatement(sql); //preparar sentencia
             System.out.println(ps);
-            ps.setInt(1, asigHorario.getIdHorarioAsignado());
-            ps.setString(2, asigHorario.getHoraEntradaAsignada());
-            ps.setString(3, asigHorario.getHoraSalidaAsignada());
-            ps.setBoolean(4, asigHorario.isEstadoHorario());
+            ps.setString(1, asigHorario.getHoraEntradaAsignada());
+            ps.setString(2, asigHorario.getHoraSalidaAsignada());
+            ps.setBoolean(3, asigHorario.isEstadoHorario());
+            ps.setInt(4, asigHorario.getIdHorarioAsignado());
             System.out.println(ps);
             ps.executeUpdate(); //Ejecutar sentencia
             ps.close(); //cerrar sentencia

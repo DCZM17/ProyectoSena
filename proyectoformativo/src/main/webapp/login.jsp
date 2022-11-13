@@ -29,7 +29,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form" action="empleado" method="POST">
+				<form class="login100-form" action="login" method="POST">
 					<span class="login100-form-title p-b-43">
 						INICIA SESIÓN
 					</span>
@@ -37,11 +37,11 @@
 					<input type="hidden" value="login" name="action" id="action">
 					<div class="wrap-input100">
 						<label class="label">CORREO ELECTRONICO</label>
-						<input class="input100" type="email" name="correo_electronico" id="correo_electronico" required>
+						<input class="input100" type="email" name="correoUsuario" id="correoUsuario" required>
 					</div>
 					<div class="wrap-input100">
 						<label class="label">CONTRASEÑA</label>
-						<input class="input100" type="password" name="password" id="password" required>
+						<input class="input100" type="password" name="contrasena" id="contrasena" required>
 
 					</div>
 
@@ -56,7 +56,6 @@
                         <div class="container-login100-form-btn">
 							<button class="login100-form-btn" style="background-color: #0064d0;">
 								Iniciar Sesión
-
 						</button>
 					</div>
 				</form>

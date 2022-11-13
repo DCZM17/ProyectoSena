@@ -17,7 +17,7 @@ BEGIN
     INSERT INTO Empleado (tipoDocEmpleado,docEmpleado, nombreEmpleado, apellidoEmpleado, celularEmpleado, direccionEmpleado,fotoEmpleado,idUsuario) VALUES(_tipoDocEmpleado, _docEmpleado, _nombreEmpleado, _apellidoEmpleado, _celularEmpleado, _direccionEmpleado,_fotoEmpleado,  (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
 END//
 
-CALL add_Empleado('ducadianis@hotmail.com','Conductor',TRUE,'ce','1019038541','Diana','Reyes','3134470215','carrera 82 # 39a 14','5');
+CALL add_Empleado('ducadianis1@hotmail.com','Conductor',TRUE,'ce','101903851','Diana','Reyes','3134470215','carrera 82 # 39a 14','5');
 
 /*Proceimiento Actualizar*/
 DELIMITER //

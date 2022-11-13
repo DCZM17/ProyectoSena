@@ -30,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="views/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
@@ -182,9 +183,10 @@
                 <h3>Soportes</h3>
             </div>
             <div class="card-body">
-                <table class="table">
+              <br>
+                <table class="table" id="example">
+                  <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Tipo de Soporte</th>
                         <th>Descripción</th>
                         <th>Fecha de Registro</th>
@@ -192,9 +194,10 @@
                         <th>Estado</th>
                         <th>Acción</th>
                     </tr>
-                    <c:forEach var="soporteL" items="${soporteList}">  
+                  </thead>
+                  <tbody id="mostrar">
+                    <c:forEach var="soporteL" items="${soporteList}"> 
                       <tr>
-                    <td>${soporteL.getIdSoporte()}</td>
                     <td>${soporteL.getTipoSoporte()}</td>
                     <td>${soporteL.getDescripcionSoporte()}</td>
                     <td>${soporteL.getFechaRegistro()}</td>
@@ -203,10 +206,10 @@
                     <td> 
                       <div>
                       <a onclick="return seguro_eliminar()"  href="soporte?action=eliminar&idSoporte=${soporteL.getIdSoporte()}"> <img src="views/assets/img/eliminar.png" style="width: 25px;"></a>
-                      <a href="soporte?action=editar&idSoporte=${soporteL.getIdSoporte()}"> <img src="views/assets/img/editar.png" style="width: 25px;"></a></td>
                     </div>
                     </tr>
                   </c:forEach> 
+                </tbody>
                 </table>
             </div>
         </div>
@@ -236,6 +239,13 @@
 
   <!-- Template Main JS File -->
   <script src="views/assets/js/main.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+
+  <script src="views/assets/js/datatable.js"></script>
+
   <script>
     function seguro_eliminar(){
       var mostrar = confirm("¿Seguro que desea eliminar el empleado?");

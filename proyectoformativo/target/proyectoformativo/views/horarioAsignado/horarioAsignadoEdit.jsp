@@ -197,10 +197,17 @@
                         </div>
                         <div class="col-sm-4">
                         </div>
+                        <div class="col-sm-4">
+                          <label class="label">Estado: <span class="text-danger">*</span></label>
+                          <select name="estadoHorario" id="estadoHorario" class="form-control" value="${asigHorario.isEstadoHorario()}">
+                              <option value="Activo">Activo</option>
+                              <option value="Inactivo">Inactivo</option>
+                          </select>
+                      </div>
                     </div>
                     <br>
                     <div class="card-footer" style="text-align: center;">
-                        <button type="submit" name="action" value="add" class="btn btn-primary">Editar Horario</button>
+                        <button type="submit" name="action" value="edit" class="btn btn-primary">Editar Horario</button>
                       </div>
                 </form>
               </c:forEach> 

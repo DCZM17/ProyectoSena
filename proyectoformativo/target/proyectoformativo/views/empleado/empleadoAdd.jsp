@@ -180,7 +180,7 @@
     <section class="section dashboard">
         <div class="card">
             <div class="card-header">
-                <h3>Crear Empleado</h3>
+                <h3>Crear Empleado Super</h3>
             </div>
             <div class="card-body">
                 <form action="empleado" method="post" onsubmit="return validar()">
@@ -235,11 +235,11 @@
                           <label class="label">Rol Empleado: <span class="text-danger">*</span></label>
                           <select name="rolUsuario" id="rolUsuario" class="form-control" >
                               <option value="">Seleccione..</option>
-                              <option value="jefe">Jefe</option>
-                              <option value="supervisor">Supervisor</option>
-                              <option value="conductor">Conductor</option>
-                              <option value="montacarga">Montacarga</option>
-                              <option value="administrador">Administrador del Sistema</option>
+                              <option value="Jefe">Jefe</option>
+                              <option value="Supervisor">Supervisor</option>
+                              <option value="Conductor">Conductor</option>
+                              <option value="Montacarga">Montacarga</option>
+                              <option value="Administrador">Administrador del Sistema</option>
                           </select>
                         </div>
                         <div class="col-sm-4">
@@ -287,7 +287,7 @@
 
   <!-- Template Main JS File -->
   <script src="views/assets/js/main.js"></script>
-  <script src="views/assets/js/validarEmp.js"></script>
+  <script src="views/assets/js/validacionesEmpleado.js"></script>
 
 </body>
 

@@ -5,7 +5,7 @@ CREATE TABLE  Usuario
 (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     correoUsuario VARCHAR(40) NOT NULL UNIQUE,
-    contrasenaUsuario VARCHAR(30)NULL ,
+    contrasenaUsuario VARCHAR (30)NULL ,
 	rolUsuario VARCHAR(30) NOT NULL,
     estadoUsuario BOOLEAN NOT NULL
 );
@@ -22,11 +22,11 @@ CREATE TABLE Empleado
 (
 	idEmpleado INTEGER PRIMARY KEY AUTO_INCREMENT,
     tipoDocEmpleado VARCHAR(30) NOT NULL,
-    docEmpleado VARCHAR(11) NOT NULL UNIQUE,
+    docEmpleado VARCHAR(10) NOT NULL UNIQUE,
     nombreEmpleado VARCHAR(30) NOT NULL,
     apellidoEmpleado VARCHAR(50) NOT NULL,
-    celularEmpleado VARCHAR (15) NOT NULL,
-    direccionEmpleado VARCHAR(100) NOT NULL,
+    celularEmpleado VARCHAR (10) NOT NULL,
+    direccionEmpleado VARCHAR(70) NOT NULL,
     fotoEmpleado VARCHAR (100) NOT NULL,
 	estadoEmpleado BOOLEAN NULL,
 	idHorarioAsignado INT NULL,

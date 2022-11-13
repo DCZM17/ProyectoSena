@@ -182,7 +182,6 @@
             <div class="card-header">
               <h2 style="font-size: 50px;">
                 Bienvenido
-               <!--  <%=request.getAttribute( "getNombreEmpleado"  )%> --> 
               </h2>
             </div>
             <br>

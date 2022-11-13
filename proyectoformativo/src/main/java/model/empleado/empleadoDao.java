@@ -48,7 +48,8 @@ public class empleadoDao {
         }
         return filas;//retornar numero de filas
      }
-     public List<empleadoVo> empleadoList() throws SQLException{
+     public List<empleadoVo> empleadoList() throws SQLException
+     {
         List<empleadoVo> empleado= new ArrayList<>();
         sql="SELECT Usuario.idUsuario, Empleado.nombreEmpleado, Empleado.apellidoEmpleado,Empleado.docEmpleado, Usuario.correoUsuario, Usuario.estadoUsuario FROM Usuario INNER JOIN Empleado ON Usuario.idUsuario=Empleado.idUsuario;";
         try {
@@ -93,47 +94,4 @@ public class empleadoDao {
         }
     }
     
-    //VALIDACION DE USUARIOS 
-    
-    public List <empleadoVo> login(String correoUsuario, String contrasenaUsuario) throws SQLException{
-        List  empleado=new ArrayList();
-        sql="SELECT idUsuario, correoUsuario, contrasenaUsuario, rolUsuario, estadoUsuario FROM Usuario WHERE correoUsuario = '"+correoUsuario+"' AND contrasenaUsuario = '"+contrasenaUsuario+"'";
-        List oso = new ArrayList();
-        try {
-            con=Conexion.conectar();
-            ps=con.prepareStatement(sql);
-            rs=ps.executeQuery(sql);
-            while(rs.next()){
-                empleadoVo filas=new empleadoVo();
-                //Escribir  en el setter cada valor encontrado
-                filas.setCorreoUsuario(rs.getString("correoUsuario"));
-                filas.setContrasenaUsuario(rs.getString("contrasenaUsuario"));
-                filas.setRolUsuario(rs.getString("rolUsuario"));
-                filas.setEstadoUsuario(rs.getBoolean("estadoUsuario"));
-
-                oso.add(rs.getInt("idUsuario"));
-                oso.add(rs.getString("correoUsuario"));
-                oso.add(rs.getString("contrasenaUsuario"));
-                oso.add(rs.getString("rolUsuario"));
-                oso.add(rs.getBoolean("estadoUsuario"));
-
-                empleado.add(filas);
-              /*   System.out.println(rs.getString("correoUsuario"));
-                System.out.println(rs.getString("contrasenaUsuario"));
-                System.out.println(rs.getString("rolUsuario"));
-                System.out.println(rs.getBoolean("estadoUsuario")); */
-            }
-            ps.close();
-            System.out.println("consulta exitosa ");
-            
-        } catch (Exception e) {
-            System.out.println("La consulta no pudo ser ejecutado "+e.getMessage().toString());//Error
-        }
-        finally{
-            con.close();
-        }
-        
-        //System.out.println(oso);
-        return oso;//retorna array con los datos de la tabla
-    }
 }

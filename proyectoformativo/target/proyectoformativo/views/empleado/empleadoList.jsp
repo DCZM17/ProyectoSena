@@ -31,8 +31,11 @@
   <!-- Template Main CSS File -->
   <link href="views/assets/css/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
+
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
@@ -182,32 +185,32 @@
                 <h3>Empleados</h3>
             </div>
             <div class="card-body">
-                <table class="table">
+              <br>
+                <table class="table" id="example">
+                  <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Número Documento</th>
                         <th>Correo Electronico</th>
                         <th>Estado</th>
-                        <th>Acción</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <c:forEach var="empleadoL" items="${empleadoList}">  
                       <tr>
-                        <td>${empleadoL.getIdUsuario()}</td>
                         <td>${empleadoL.getNombreEmpleado()}</td>
                         <td>${empleadoL.getApellidoEmpleado()}</td>
                         <td>${empleadoL.getDocEmpleado()}</td>
                         <td>${empleadoL.getCorreoUsuario()}</td>
                         <td>${empleadoL.getEstadoUsuario()}</td>
-                        <td> 
-                          <div>
-                            <a onclick="return seguro_eliminar()" href="empleado?action=eliminar&id=${empleadoL.getIdEmpleado()}"> <img src="views/assets/img/eliminar.png" style="width: 25px;"></a>
-                            <a href="empleado?action=editar&id=${empleadoL.getIdEmpleado()}"> <img src="views/assets/img/editar.png" style="width: 25px;"></a>
-                          </div>
-                      </td>
-                        </tr>
+                        <td><a href="empleado?action=editar&id=${empleadoL.getIdEmpleado()}"> <img src="views/assets/img/editar.png" style="width: 25px;"></a></td>  
+                        <td><a onclick="return seguro_eliminar()" href="empleado?action=eliminar&id=${empleadoL.getIdEmpleado()}"> <img src="views/assets/img/eliminar.png" style="width: 25px;"></a></td>
+                      </tr>
                       </c:forEach> 
+                  </tbody>
                 </table>
             </div>
         </div>
@@ -237,6 +240,12 @@
 
   <!-- Template Main JS File -->
   <script src="views/assets/js/main.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+
+  <script src="views/assets/js/datatable.js"></script>
 
   <script>
     function seguro_eliminar(){
