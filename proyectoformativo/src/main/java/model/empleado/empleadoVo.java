@@ -1,25 +1,24 @@
 package model.empleado;
 
+
 public class empleadoVo {
-
-    //Datos tabla Usuario
-    private int idUsuario;
-    private String correoUsuario;
-    private String contrasenaUsuario;
-    private String rolUsuario;
-    private Boolean estadoUsuario;
-
-    //Datos tabla empleado
-    private int idEmpleado;
-    private String tipoDocEmpleado;
-    private String docEmpleado;
-    private String nombreEmpleado;
-    private String apellidoEmpleado;
-    private String celularEmpleado;
-    private String direccionEmpleado;
-    private String correoEmpleado;
-    private String fotoEmpleado;
-
+        //Datos tabla Usuario
+        private int idUsuario;
+        private String correoUsuario;
+        private String contrasenaUsuario;
+        private String rolUsuario;
+        private Boolean estadoUsuario;
+    
+        //Datos tabla empleado
+        private int idEmpleado;
+        private String tipoDocEmpleado;
+        private String docEmpleado;
+        private String nombreEmpleado;
+        private String apellidoEmpleado;
+        private String celularEmpleado;
+        private String direccionEmpleado;
+        private String correoEmpleado;
+        private String fotoEmpleado;
 
     //Metodo Constructor vacio 
     public empleadoVo(){
