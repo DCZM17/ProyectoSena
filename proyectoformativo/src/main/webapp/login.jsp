@@ -47,7 +47,7 @@
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32" >
 						<div>
-							<a href="#" class="txt1">
+							<a href="forgotPassword.jsp" class="txt1">
 								¿Olvidaste tu contraseña?
 							</a>
 						</div>
@@ -65,8 +65,5 @@
 			</div>
 		</div>
 	</div>
-
-	
-	
 </body>
 </html>

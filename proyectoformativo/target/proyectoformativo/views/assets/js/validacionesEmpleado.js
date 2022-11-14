@@ -39,7 +39,7 @@ function validar() {
     }
 
     //VALIDACION DE LONGITUD DE CARACTERES 
-    else if (numeroCaracteresNombre > 3) {
+    else if (numeroCaracteresNombre > 20) {
         alert("El nombre del empleado es demasiado largo");
         return false;
     }

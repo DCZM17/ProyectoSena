@@ -73,8 +73,10 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Paula López</h6>
-              <span>Web Designer</span>
+              <c:forEach var="empleadoL" items="${empleadoList}">  
+              <h6>${empleadoL.getNombreEmpleado()} </h6>
+              <span>${empleadoL.getRolUsuario()}</span>
+            </c:forEach> 
             </li>
             <li>
               <hr class="dropdown-divider">

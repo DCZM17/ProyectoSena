@@ -80,9 +80,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="<%=request.getContextPath()%>/logout">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Cerrar Sesión</span>
+                <span>Cerrar Sesion</span>
               </a>
             </li>
           </ul><!-- End Profile Dropdown Items -->

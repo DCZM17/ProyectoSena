@@ -12,9 +12,11 @@ public class logout extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         HttpSession session = req.getSession(false); 
- 
+
         if(session!=null) 
         {
+            session.removeAttribute("correoUsuario");
+            session.removeAttribute("contrasena");
             session.invalidate(); 
             req.setAttribute("errMessage", "Ha cerrado sesion correctamente");
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
@@ -23,3 +25,5 @@ public class logout extends HttpServlet{
         }
     }
 }
+
+

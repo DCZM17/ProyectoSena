@@ -5,7 +5,7 @@ CREATE TABLE  Usuario
 (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     correoUsuario VARCHAR(40) NOT NULL UNIQUE,
-    contrasenaUsuario VARCHAR (30)NULL ,
+    contrasenaUsuario VARCHAR (30)NOT NULL ,
 	rolUsuario VARCHAR(30) NOT NULL,
     estadoUsuario BOOLEAN NOT NULL
 );
@@ -28,11 +28,10 @@ CREATE TABLE Empleado
     celularEmpleado VARCHAR (10) NOT NULL,
     direccionEmpleado VARCHAR(70) NOT NULL,
     fotoEmpleado VARCHAR (100) NOT NULL,
-	estadoEmpleado BOOLEAN NULL,
 	idHorarioAsignado INT NULL,
     FOREIGN KEY FK_idHorarioAsignado (idHorarioAsignado)
     REFERENCES HorarioAsignado (idHorarioAsignado),
-	idUsuario  INT NULL,
+	idUsuario  INT NOT NULL,
 	FOREIGN KEY FK_idUsuario (idUsuario)
     REFERENCES Usuario (idUsuario)
 );

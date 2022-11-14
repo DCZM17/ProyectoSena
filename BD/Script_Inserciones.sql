@@ -1,6 +1,6 @@
 /* Inserciones empleado y usuario*/
 CALL add_Empleado('pnlopez5@gmail.com','Supervisor',TRUE,'CE','1031803155','Paula','Lopez','3228410325','calle 125 c bis 94 31','2');
-CALL add_Empleado('vcastro619gmail.com.','Supervisor',TRUE,'CC','1054258985','Valentina','Castro','3165903247','avenida suba # 15 b','3');
+CALL add_Empleado('vcastro619@gmail.com','Montacarga',TRUE,'CC','1054258985','Valentina','Castro','3165903247','avenida suba # 15 b','3');
 CALL add_Empleado('dfpiamonte@gmail.com','Conductor',FALSE,'CC','1042930471','David','Piamonte','3287459632','avenida caracas 65 15','4');
 CALL add_Empleado('ducadianis@hotmail.com','Conductor',TRUE,'CE','1019038541','Diana','Reyes','3134470215','carrera 82 # 39a 14','5');
 

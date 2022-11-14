@@ -158,3 +158,5 @@ public class horarioReController extends HttpServlet {
     }
 
 }
+
+//destroy session in java
