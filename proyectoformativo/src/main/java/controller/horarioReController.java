@@ -60,7 +60,7 @@ public class horarioReController extends HttpServlet {
     // LISTAR
     private void listar(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            List horarioRList = rd.listar();
+            List <horarioReVo>horarioRList = rd.listar();
             req.setAttribute("listar", horarioRList);
             req.getRequestDispatcher("views/horarioRegistrado/horarioRegistradoList.jsp").forward(req, resp);
             System.out.println("Datos listados correctamente");

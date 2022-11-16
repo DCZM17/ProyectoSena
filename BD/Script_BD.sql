@@ -28,7 +28,7 @@ CREATE TABLE Empleado
     celularEmpleado VARCHAR (10) NOT NULL,
     direccionEmpleado VARCHAR(70) NOT NULL,
     fotoEmpleado VARCHAR (100) NOT NULL,
-	idHorarioAsignado INT NULL,
+	idHorarioAsignado INT NOT NULL,
     FOREIGN KEY FK_idHorarioAsignado (idHorarioAsignado)
     REFERENCES HorarioAsignado (idHorarioAsignado),
 	idUsuario  INT NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE Soporte
 	idSoporte INT PRIMARY KEY AUTO_INCREMENT,
     tipoSoporte VARCHAR(30) NOT NULL,
     descripcionSoporte VARCHAR(1000) NOT NULL,
-    fechaRegistro DATETIME NOT NULL,
+    fechaRegistro VARCHAR(40) NOT NULL,
     fechaSoporte TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
     soporte VARCHAR (100) NOT NULL,
     estadoSoporte VARCHAR (20)  NULL,

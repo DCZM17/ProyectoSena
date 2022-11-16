@@ -234,7 +234,7 @@
                         <div class="col-sm-4">
                           <label class="label">Rol Empleado: <span class="text-danger">*</span></label>
                           <select name="rolUsuario" id="rolUsuario" class="form-control" >
-                              <option value="">Seleccione..</option>
+                              <option  selected disabled>Seleccione..</option>
                               <option value="Jefe">Jefe</option>
                               <option value="Supervisor">Supervisor</option>
                               <option value="Conductor">Conductor</option>
@@ -243,12 +243,19 @@
                           </select>
                         </div>
                         <div class="col-sm-4">
-                           
+                        <label class="label">Seleccion Horario a Asignar <span class="text-danger">*</span></label> 
+                        <select name="idHorarioAsignado" id="idHorarioAsignado" class="form-control">                   
+                      <option selected disabled>Seleccione ...</option>
+                      <c:forEach var="asigHorario" items="${Asiglistar}">
+                        <option value="${asigHorario.getIdHorarioAsignado()}">${asigHorario.getHoraEntradaAsignada()} A ${asigHorario.getHoraSalidaAsignada()}</option>
+                      </c:forEach>
+                    </select>  
+                    </div>    
                         </div>
                         <div class="col-sm-4">
                             <label class="label">Estado: <span class="text-danger">*</span></label>
                             <select name="estadoUsuario" id="estadoUsuario" class="form-control" >
-                                <option value="">Seleccione..</option>
+                                <option  selected disabled>Seleccione..</option>
                                 <option value="Activo">Activo</option>
                                 <option value="Inactivo">Inactivo</option>
                             </select>

@@ -46,7 +46,7 @@
 							 <input id="opt" name="otp" placeholder="Ingrese Codigo" class="input100" type="text" required="required">
 					</div>
                         <div class="container-login100-form-btn">
-							<input name="recover-submit" class="login100-form-btn" value="Reset Password" type="submit">
+							<input name="recover-submit" class="login100-form-btn" value="Verificar Codigo" type="submit">
 					</div>
 					<input type="hidden" class="hide" name="token" id="token" value="">
 				</form>

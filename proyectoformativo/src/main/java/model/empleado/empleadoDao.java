@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import model.Conexion;
+import model.horarioAsignado.asigHorarioVo;
 
 public class empleadoDao {
     
@@ -19,8 +20,8 @@ public class empleadoDao {
     ResultSet rs;
     String sql=null;
     int filas;
-    public int registrar(empleadoVo empleado) throws SQLException{
-        sql="CALL add_Empleado(?,?,?,?,?,?,?,?,?,?)";
+    public int registrar(empleadoVo empleado, asigHorarioVo asigHorario) throws SQLException{
+        sql="CALL add_Empleado(?,?,?,?,?,?,?,?,?,?,?)";
         try{
             con=Conexion.conectar();
             ps=con.prepareStatement(sql);
@@ -34,6 +35,7 @@ public class empleadoDao {
             ps.setString(8, empleado.getCelularEmpleado());//
             ps.setString(9, empleado.getDireccionEmpleado());//
             ps.setString(10, empleado.getFotoEmpleado());//
+            ps.setInt(11, asigHorario.getIdHorarioAsignado());//
 
 
             System.out.println(ps);
@@ -78,7 +80,7 @@ public class empleadoDao {
         return empleado;
     }
     public void eliminar(int id) throws SQLException{
-        sql = "CALL delete_Empleado ('?','?');"+id;
+        sql = "CALL delete_Empleado('1','1');";
         try{
             con=Conexion.conectar(); 
             ps=con.prepareStatement(sql); 

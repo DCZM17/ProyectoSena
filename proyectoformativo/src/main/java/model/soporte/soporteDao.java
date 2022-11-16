@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import model.Conexion;
 
 public class soporteDao {
@@ -17,6 +18,9 @@ public class soporteDao {
     ResultSet rs; 
     String sql=null;
     int filas; 
+
+    
+        
 
     //REGISTRAR O INSERTAR 
     public int registrar(soporteVo Soporte) throws SQLException{
@@ -165,32 +169,5 @@ public class soporteDao {
         }
         return filas;
     }
-    public List<soporteVo> soporteList(int idSoporte) throws SQLException {
-        List<soporteVo> Soporte=new ArrayList<>();
-        sql="SELECT * FROM HorarioAsignado WHERE idHorarioAsignado="+idSoporte;
-        try {
-            con=Conexion.conectar();
-            ps=con.prepareStatement(sql);
-            rs=ps.executeQuery(sql);
-            while(rs.next()){
-                soporteVo filas=new soporteVo();
-                //Escribir  en el setter cada valor encontrado
-                filas.setIdSoporte(rs.getInt("idSoporte"));
-                filas.setTipoSoporte(rs.getString("tipoSoporte"));
-                filas.setDescripcionSoporte(rs.getString("descripcionSoporte"));
-                filas.setFechaRegistro(rs.getString(" fechaRegistro"));
-                filas.setFechaSoporte(rs.getString("fechaSoporte"));
-                filas.setSoporte(rs.getString("soporte"));
-                Soporte.add(filas);
-            }
-            ps.close();
-            System.out.println("consulta exitosa");
-        } catch (Exception e) {
-            System.out.println("La consulta no pudo ser ejecutada "+e.getMessage().toString());
-        }
-        finally{
-            con.close();
-        }
-        return Soporte;
-    }
+
 }

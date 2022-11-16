@@ -2,24 +2,24 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.empleado.empleadoDao;
+import model.horarioAsignado.asigHorarioDao;
+import model.horarioAsignado.asigHorarioVo;
 import model.empleado.empleadoVo;
 
 public class empleadoController extends HttpServlet {
     empleadoVo r = new empleadoVo();
     empleadoDao rd = new empleadoDao();
+
+    asigHorarioVo rc = new asigHorarioVo();
+    asigHorarioDao rz = new asigHorarioDao();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +28,12 @@ public class empleadoController extends HttpServlet {
         System.out.println(a);
         switch (a) {
             case "ingresar":
-                ingresar(req, resp);
-                break;
-                case "listar":
-                empleadoList(req, resp);
-                break;
-                
+            consultarEmpleado(req,resp);
+            ingresar(req, resp);
+            break;
+            case "listar":
+            empleadoList(req, resp);
+            break;     
         }
     }
 
@@ -46,13 +46,18 @@ public class empleadoController extends HttpServlet {
             case "add":
                 add(req, resp);
                 break;
-            case "eliminar":
-                eliminar(req, resp);
-                break;
-
         }
     }
-
+    //nombrese desde base de datos
+    private void consultarEmpleado(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            List<asigHorarioVo> asigHorario=rz.Asiglistar();
+            req.setAttribute("Asiglistar", asigHorario);
+            System.out.println("Datos del rol listados correctamente");
+        } catch (Exception e) {
+            System.out.println("Hay problemas");
+        }
+    }
     private void ingresar(HttpServletRequest req, HttpServletResponse resp) {
         try {
             req.getRequestDispatcher("views/empleado/empleadoAdd.jsp").forward(req, resp);
@@ -62,7 +67,6 @@ public class empleadoController extends HttpServlet {
         }
     }
   
-
     private void add(HttpServletRequest req, HttpServletResponse resp) {
 
         if (req.getParameter("correoUsuario") != null) {
@@ -105,8 +109,11 @@ public class empleadoController extends HttpServlet {
         if (req.getParameter("fotoEmpleado") != null) {
             r.setFotoEmpleado(req.getParameter("fotoEmpleado"));
         }
+        if (req.getParameter("idHorarioAsignado") != null) {
+            rc.setIdHorarioAsignado(Integer.parseInt(req.getParameter("idHorarioAsignado")));
+        }
         try {
-            rd.registrar(r);
+            rd.registrar(r, rc);
             System.out.println("Registro insertado correctamente");
             empleadoList(req, resp);
         } catch (Exception e) {
@@ -123,21 +130,6 @@ public class empleadoController extends HttpServlet {
             System.out.println("Datos listados de manera correcta");
         } catch (Exception e) {
             System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
-        }
-    }
-    
-
-    private void eliminar(HttpServletRequest req, HttpServletResponse resp) {
-        if (req.getParameter("id") != null) {
-            r.setIdEmpleado(Integer.parseInt(req.getParameter("id")));
-        }
-        try {
-            rd.eliminar(r.getIdUsuario());
-            ;
-            System.out.println("El registro se elimino exitosamente");
-            empleadoList(req, resp);
-        } catch (Exception e) {
-            System.out.println("Error en la eliminacion" + e.getMessage().toString());
         }
     }
 }

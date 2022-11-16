@@ -27,6 +27,8 @@
   <link href="views/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="views/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="views/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <script src="html2pdf.bundle.min.js"></script>
+  <script src="views/assets/js/reporte.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="views/assets/css/style.css" rel="stylesheet">
@@ -190,7 +192,7 @@
                 </div>
               </div>
               <br>
-                <table class="table" id="example">
+                <table class="table" id="example"> 
                   <thead>
                     <tr>
                       <th>Fecha de Registro</th>
@@ -279,6 +281,7 @@
   <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 
   <script src="views/assets/js/datatable.js"></script>
+
 
 
 </body>

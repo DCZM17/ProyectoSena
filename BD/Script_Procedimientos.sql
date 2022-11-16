@@ -11,7 +11,8 @@ IN _nombreEmpleado VARCHAR(30),
 IN _apellidoEmpleado VARCHAR(30),
 IN _celularEmpleado VARCHAR (15),
 IN _direccionEmpleado VARCHAR(100),
-IN _fotoEmpleado VARCHAR(100)
+IN _fotoEmpleado VARCHAR(100),
+IN _idHorarioAsignado INT
 )
 BEGIN
 DECLARE aux VARCHAR (30)  DEFAULT ' ';
@@ -26,8 +27,10 @@ SET letraN = UPPER(LEFT(_nombreEmpleado,1) );
 SET letraA1 = LOWER(LEFT(_apellidoEmpleado,1) );
 SET contrasenaUsuario = CONCAT (digitos,letraN,'-',letraA1); 
     INSERT INTO Usuario (correoUsuario,contrasenaUsuario,  rolUsuario, estadoUsuario) VALUES(_correoUsuario,contrasenaUsuario,  _rolUsuario, _estadoUsuario);
-    INSERT INTO Empleado (tipoDocEmpleado,docEmpleado, nombreEmpleado, apellidoEmpleado, celularEmpleado, direccionEmpleado,fotoEmpleado,idUsuario) VALUES(_tipoDocEmpleado, _docEmpleado, _nombreEmpleado, _apellidoEmpleado, _celularEmpleado, _direccionEmpleado,_fotoEmpleado,  (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
+    INSERT INTO Empleado (tipoDocEmpleado,docEmpleado, nombreEmpleado, apellidoEmpleado, celularEmpleado, direccionEmpleado,fotoEmpleado,idHorarioAsignado,idUsuario) VALUES(_tipoDocEmpleado, _docEmpleado, _nombreEmpleado, _apellidoEmpleado, _celularEmpleado, _direccionEmpleado,_fotoEmpleado,_idHorarioAsignado, (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
 END//
+DELIMITER //
+
 CALL add_Empleado('ducadianis1@hotmail.com','Conductor',TRUE,'CC',1019038350,'Diana','Reyes','3134470215','carrera 82 # 39a 14','5');
 
 /*Proceimiento Actualizar*/

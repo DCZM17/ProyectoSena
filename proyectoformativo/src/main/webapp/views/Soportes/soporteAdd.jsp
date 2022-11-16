@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import = "controller.soporteController"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,9 +81,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="<%=request.getContextPath()%>/logout">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Cerrar Sesion</span>
+                <span>Cerrar Sesión</span>
               </a>
             </li>
           </ul><!-- End Profile Dropdown Items -->
@@ -196,12 +197,17 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
+                            <%
+                               soporteController sf = new soporteController();
+                               String fecha = sf.obtenerFecha();
+                               System.out.println(fecha); 
+                            %>
                             <label class="label">Fecha de Registro: <span class="text-danger">*</span></label>
-                            <input type="datetime-local" name="fechaRegistro" id="fechaRegistro" class="form-control" required>
+                            <input type="text"  name="fechaRegistro" id="fechaRegistro" class="form-control" value="<%=fecha%>" required readonly>
                         </div>
                         <div class="col-sm-4">
                             <label class="label">Fecha de Soporte: <span class="text-danger">*</span></label>
-                            <input type="datetime-local" name="fechaSoporte" id="fechaSoporte" class="form-control" required>
+                            <input type="datetime-local" name="fechaSoporte" id="fechaSoporte" class="form-control"  required>
                         </div>
                     </div>
                     <br>

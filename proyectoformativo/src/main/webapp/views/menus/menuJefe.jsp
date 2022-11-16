@@ -110,7 +110,7 @@
         </a>
         <ul id="empleado-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="empleado?action=ingresar_Jefe">
+            <a href="empleado?action=ingresar">
               <i class="bi bi-circle"></i><span>Crear</span>
             </a>
           </li>
