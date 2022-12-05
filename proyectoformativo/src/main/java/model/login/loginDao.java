@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import model.Conexion;
 
+
 public class loginDao {
     
     public String authenticateUser(loginVo loginVo){
@@ -20,27 +21,41 @@ public class loginDao {
     String userNameDB = "";
     String passwordDB = "";
     String roleDB = "";
+    String idUsuarioDB = "";
+    String nombreUsuarioDB = "";
+    String apellidoUsuarioDB = "";
+   
  
     try
     {
         con=Conexion.conectar();
         statement = con.createStatement();
-        resultSet = statement.executeQuery("select correoUsuario,contrasenaUsuario,rolUsuario from Usuario");
+        resultSet = statement.executeQuery("select u.idUsuario, u.correoUsuario, u.contrasenaUsuario, u.rolUsuario, e.nombreEmpleado, e.apellidoEmpleado\n" +
+        "from Usuario u \n" +
+        "INNER JOIN empleado e ON u.idUsuario = e.idUsuario;");
  
         while(resultSet.next())
         {
+            
+            idUsuarioDB = resultSet.getString("idUsuario");
             userNameDB = resultSet.getString("correoUsuario");
             passwordDB = resultSet.getString("contrasenaUsuario");
             roleDB = resultSet.getString("rolUsuario");
+            nombreUsuarioDB = resultSet.getString("nombreEmpleado");
+            apellidoUsuarioDB = resultSet.getString("apellidoEmpleado");
+            
+            
  
-            if(correoUsuario.equals(userNameDB) && contrasena.equals(passwordDB) && roleDB.equals("Jefe"))
-            return "Jefe_Rol";
-            else if(correoUsuario.equals(userNameDB) && contrasena.equals(passwordDB) && roleDB.equals("Supervisor"))
-            return "Supervisor_Rol";
+            if(correoUsuario.equals(userNameDB) && contrasena.equals(passwordDB) && roleDB.equals("Jefe")){
+             
+             return idUsuarioDB+","+userNameDB+","+roleDB+","+nombreUsuarioDB+","+apellidoUsuarioDB;
+             
+            }else if(correoUsuario.equals(userNameDB) && contrasena.equals(passwordDB) && roleDB.equals("Supervisor"))
+            return idUsuarioDB+","+userNameDB+","+roleDB+","+nombreUsuarioDB+","+apellidoUsuarioDB;
             else if(correoUsuario.equals(userNameDB) && contrasena.equals(passwordDB) && roleDB.equals("Conductor"))
-            return "Conductor_Rol";
+           return idUsuarioDB+","+userNameDB+","+roleDB+","+nombreUsuarioDB+","+apellidoUsuarioDB;
             else if(correoUsuario.equals(userNameDB) && contrasena.equals(passwordDB) && roleDB.equals("Montacarga"))
-            return "Montacarga_Rol";
+            return idUsuarioDB+","+userNameDB+","+roleDB+","+nombreUsuarioDB+","+apellidoUsuarioDB;
         }
     }
     catch(SQLException e)

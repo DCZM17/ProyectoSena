@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import model.soporte.soporteDao;
 import model.soporte.soporteVo;
 
+import model.empleado.empleadoDao;
+import model.empleado.empleadoVo;
+
 public class soporteController extends HttpServlet{
 
     public String obtenerFecha() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         String date = dateFormat.format(Calendar.getInstance().getTime());
         return date;       // dom, 24 de diciembre de 2017 a las 16:34:27
         
@@ -26,6 +29,8 @@ public class soporteController extends HttpServlet{
     // declarar variable
     soporteVo r=new soporteVo();
     soporteDao rd=new soporteDao();
+    empleadoVo rc=new empleadoVo();
+    empleadoDao rz=new empleadoDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,8 +46,14 @@ public class soporteController extends HttpServlet{
            case "eliminar":
            eliminar(req, resp);
            break;
+           case "estado":
+           estado(req, resp);
+           break; 
            case "listar":
            soporteList(req, resp);
+           break;
+           case "listarId":
+           listarId(req,resp);
            break;
         }
     }
@@ -83,6 +94,12 @@ public class soporteController extends HttpServlet{
         if(req.getParameter("soporte")!=null){
             r.setSoporte(req.getParameter("soporte"));
         }
+        if (req.getParameter("estadoSoporte") != null) {
+            r.setEstadoSoporte(false);
+        }
+        if(req.getParameter("idEmpleado")!=null){
+            r.setIdEmpleado(Integer.parseInt(req.getParameter("idEmpleado")));
+        }
         try {
             rd.registrar(r);
             System.out.println("Registro insertado correctamente");
@@ -101,6 +118,21 @@ public class soporteController extends HttpServlet{
             System.out.println("Hay problemas al Consultar los datos "+e.getMessage().toString());
         }
     } 
+    
+        private void listarId(HttpServletRequest req, HttpServletResponse resp) {
+        
+            
+            r.setIdEmpleado(Integer.parseInt(req.getParameter("idUsuario")));
+        try {
+            //List <horarioReVo> horarioRList = rd.listar();
+            List  <soporteVo> soporteL = rd.listarId(r.getIdEmpleado());
+           req.setAttribute("soporteList", soporteL);
+            req.getRequestDispatcher("views/Soportes/soporteList.jsp").forward(req, resp);
+            System.out.println("Datos Consultados correctamente");
+        } catch (Exception e) {
+            System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
+        }
+    }
      //eliminar
      private void eliminar(HttpServletRequest req, HttpServletResponse resp) {
         if(req.getParameter("idSoporte")!=null){
@@ -112,6 +144,21 @@ public class soporteController extends HttpServlet{
             soporteList(req, resp);
         } catch (Exception e) {
             System.out.println("Error en el cambio de estado "+e.getMessage().toString());
+        }
+    }
+    private void estado(HttpServletRequest req, HttpServletResponse resp){
+        if(req.getParameter("idSoporte")!=null){
+            r.setIdSoporte(Integer.parseInt(req.getParameter("idSoporte")));
+        }
+        if(req.getParameter("estado")!=null){
+            r.setEstadoSoporte(Boolean.parseBoolean(req.getParameter("estado")));
+        }
+        try{
+            rd.estado(r.getEstadoSoporte(), r.getIdSoporte());
+            System.out.println("El estado se cambio correctamente");
+            soporteList(req, resp);
+        }catch(Exception e){
+            System.out.println("Error en el cambio de estado"+e.getMessage().toString());
         }
     }
 }

@@ -3,12 +3,13 @@ USE bdacarreosgutierrez;
 
 CREATE TABLE  Usuario
 (
-	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+	idUsuario INTEGER PRIMARY KEY AUTO_INCREMENT,
     correoUsuario VARCHAR(40) NOT NULL UNIQUE,
     contrasenaUsuario VARCHAR (30)NOT NULL ,
 	rolUsuario VARCHAR(30) NOT NULL,
     estadoUsuario BOOLEAN NOT NULL
 );
+
 
 CREATE TABLE HorarioAsignado
 (
@@ -43,10 +44,10 @@ CREATE TABLE Soporte
     descripcionSoporte VARCHAR(1000) NOT NULL,
     fechaRegistro VARCHAR(40) NOT NULL,
     fechaSoporte TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-    soporte VARCHAR (100) NOT NULL,
+    soporte MEDIUMBLOB NOT NULL,
     estadoSoporte VARCHAR (20)  NULL,
-    idEmpleado INT NULL,
-    FOREIGN KEY FK_idEmpleado (idEmpleado)
+	idEmpleado  INT  NOT NULL,
+	FOREIGN KEY FK_idEmpleado (idEmpleado)
     REFERENCES Empleado (idEmpleado)
 );
 

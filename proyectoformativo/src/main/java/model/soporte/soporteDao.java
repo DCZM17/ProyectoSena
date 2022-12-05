@@ -24,7 +24,7 @@ public class soporteDao {
 
     //REGISTRAR O INSERTAR 
     public int registrar(soporteVo Soporte) throws SQLException{
-        sql="INSERT INTO Soporte(tipoSoporte,descripcionSoporte,fechaRegistro,fechaSoporte,soporte) values(?,?,?,?,?)";
+        sql="INSERT INTO Soporte(tipoSoporte,descripcionSoporte,fechaRegistro,fechaSoporte,soporte,estadoSoporte,idEmpleado) values(?,?,?,?,?,?,?)";
         try{
             con=Conexion.conectar(); //abrir conexión
             ps=con.prepareStatement(sql); //preparar sentencia
@@ -33,6 +33,8 @@ public class soporteDao {
             ps.setString(3, Soporte.getFechaRegistro());
             ps.setString(4, Soporte.getFechaSoporte());
             ps.setString(5,Soporte.getSoporte());
+            ps.setBoolean(6,Soporte.getEstadoSoporte());
+            ps.setInt(7, Soporte.getIdEmpleado());
             System.out.println(ps);
             ps.executeUpdate(); //Ejecutar sentencia
             ps.close(); //cerrar sentencia
@@ -48,7 +50,7 @@ public class soporteDao {
         //  CONSULTAR
         public List<soporteVo> soporteList() throws SQLException{
             List<soporteVo> soporte=new ArrayList<>();
-            sql="SELECT * FROM Soporte";
+            sql="SELECT a.idSoporte, a.tipoSoporte, a.descripcionSoporte, a.fechaRegistro, a.fechaSoporte, a.soporte, a.estadoSoporte, a.idEmpleado, e.nombreEmpleado, e.apellidoEmpleado FROM Soporte a INNER JOIN empleado e ON e.idEmpleado = a.idEmpleado;";
             try {
                 con=Conexion.conectar();
                 ps=con.prepareStatement(sql);
@@ -63,6 +65,10 @@ public class soporteDao {
                     filas.setFechaSoporte(rs.getString("fechaSoporte"));
                     filas.setSoporte(rs.getString("soporte"));
                     filas.setEstadoSoporte(rs.getBoolean("estadoSoporte"));
+                    filas.setIdEmpleado(rs.getInt("idEmpleado"));
+                    filas.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                    filas.setApellidoEmpleado(rs.getString("apellidoEmpleado"));
+
                     soporte.add(filas);
                 }
                 ps.close();
@@ -76,6 +82,45 @@ public class soporteDao {
             return soporte;
         }
         
+            //LISTAR POR ID 
+    
+    public List<soporteVo> listarId(int idEmpleado) throws SQLException{
+        List<soporteVo> soporte = new ArrayList<>();
+        sql = "SELECT a.idSoporte, a.tipoSoporte, a.descripcionSoporte, a.fechaRegistro, a.fechaSoporte, a.soporte, a.estadoSoporte, a.idEmpleado, e.nombreEmpleado, e.apellidoEmpleado FROM Soporte a INNER JOIN empleado e ON e.idEmpleado = a.idEmpleado WHERE e.idEmpleado="+idEmpleado;
+        try {
+            con = Conexion.conectar();
+            ps = con.prepareStatement(sql);
+            System.out.println(ps);
+            rs = ps.executeQuery(sql);
+                
+                while (rs.next()) {
+                    soporteVo filas=new soporteVo();
+                    //Escribir  en el setter cada valor encontrado
+                    filas.setIdSoporte(rs.getInt("idSoporte"));
+                    filas.setTipoSoporte(rs.getString("tipoSoporte"));
+                    filas.setDescripcionSoporte(rs.getString("descripcionSoporte"));
+                    filas.setFechaRegistro(rs.getString("fechaRegistro"));
+                    filas.setFechaSoporte(rs.getString("fechaSoporte"));
+                    filas.setSoporte(rs.getString("soporte"));
+                    filas.setEstadoSoporte(rs.getBoolean("estadoSoporte"));
+                    filas.setIdEmpleado(rs.getInt("idEmpleado"));
+                    filas.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                    filas.setApellidoEmpleado(rs.getString("apellidoEmpleado"));
+
+                    soporte.add(filas);
+                }
+                ps.close();
+                System.out.println("consulta exitosa");
+            } catch (Exception e) {
+                System.out.println("La consulta no se pudo ejecutar "+e.getMessage().toString());
+            }
+            finally{
+                con.close();
+            }
+    
+            return soporte;
+        }
+    
     //Eliminar 
     public void eliminar (int idSoporte) throws SQLException {
         sql="DELETE FROM Soporte WHERE idSoporte="+idSoporte;
@@ -114,9 +159,9 @@ public class soporteDao {
 
     
     //Editar
-    public List<soporteVo> editar(int idSoporte) throws SQLException{
+    public List<soporteVo> editar( ) throws SQLException{
         List<soporteVo> Soporte=new ArrayList<>();
-        sql="SELECT * FROM Soporte WHERE idSoporte="+idSoporte;
+        sql="SELECT * FROM Soporte  ";
         try {
             con=Conexion.conectar();
             ps=con.prepareStatement(sql);
@@ -155,7 +200,7 @@ public class soporteDao {
             ps.setString(2, Soporte.getSoporte());
             ps.setString(3, Soporte.getFechaRegistro());
             ps.setString(4, Soporte.getFechaSoporte());
-            ps.setBoolean(5, Soporte.isEstadoSoporte());
+            ps.setBoolean(5, Soporte.getEstadoSoporte());
             System.out.println(ps);
             ps.executeUpdate(); //Ejecutar sentencia
             ps.close(); //cerrar sentencia

@@ -19,6 +19,9 @@ public class empleadoVo {
         private String direccionEmpleado;
         private String correoEmpleado;
         private String fotoEmpleado;
+        
+        private String horaEntradaAsignada;
+        private String horaSalidaAsignada;
 
     //Metodo Constructor vacio 
     public empleadoVo(){
@@ -27,7 +30,8 @@ public class empleadoVo {
     //Metodo Constructor con parametros
     public empleadoVo(int idUsuario, String correoUsuario, String contrasenaUsuario, String rolUsuario, boolean estadoUsuario,
                       int idEmpleado, String tipoDocEmpleado, String docEmpleado, String nombreEmpleado, String apellidoEmpleado,
-                      String celularEmpleado, String direccionEmpleado, String correoEmpleado, String fotoEmpleado){
+                      String celularEmpleado, String direccionEmpleado, String correoEmpleado, String fotoEmpleado, String horaEntradaAsignada,
+                      String horaSalidaAsignada){
 
                         this.idUsuario = idUsuario;
                         this.correoUsuario = correoUsuario;
@@ -43,6 +47,8 @@ public class empleadoVo {
                         this.direccionEmpleado = direccionEmpleado;
                         this.correoEmpleado = correoEmpleado;
                         this.fotoEmpleado = fotoEmpleado;
+                        this.horaEntradaAsignada = horaEntradaAsignada;
+                        this.horaSalidaAsignada = horaSalidaAsignada;
 
     }
     //Getters and setters de la tabla usuario
@@ -133,4 +139,19 @@ public class empleadoVo {
         this.fotoEmpleado = fotoEmpleado;
     }
 
+    public String getHoraEntradaAsignada(){
+        return horaEntradaAsignada;
+    }
+    
+    public void setHoraEntradaAsignada(String horaEntradaAsignada){
+        this.horaEntradaAsignada = horaEntradaAsignada;
+    }
+    
+        public String getHoraSalidaAsignada(){
+        return horaSalidaAsignada;
+    }
+    
+    public void setHoraSalidaAsignada(String horaSalidaAsignada){
+        this.horaSalidaAsignada = horaSalidaAsignada;
+    }
 }

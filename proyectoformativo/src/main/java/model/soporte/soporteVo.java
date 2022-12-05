@@ -7,14 +7,17 @@ public class soporteVo {
     private String fechaRegistro;
     private String fechaSoporte;
     private String soporte;
-    private boolean estadoSoporte;
+    private Boolean estadoSoporte;
+    private int idEmpleado;
+    private String nombreEmpleado;
+    private String apellidoEmpleado;
 
     public soporteVo(){
 
 
     }
     public soporteVo(int idSoporte, String tipoSoporte,String descripcionSoporte, String fechaRegistro, String fechaSoporte,String soporte,
-            boolean estadoSoporte) {
+            Boolean estadoSoporte, int idEmpleado, String nombreEmpleado, String apellidoEmpleado) {
         this.idSoporte = idSoporte;
         this.tipoSoporte = tipoSoporte;
         this.descripcionSoporte = descripcionSoporte;
@@ -22,6 +25,8 @@ public class soporteVo {
         this.fechaSoporte = fechaSoporte;
         this.soporte = soporte;
         this.estadoSoporte = estadoSoporte;
+        this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
     }
     public int getIdSoporte() {
         return idSoporte;
@@ -59,11 +64,30 @@ public class soporteVo {
     public void setSoporte(String soporte) {
         this.soporte = soporte;
     }
-    public boolean isEstadoSoporte() {
+    public Boolean getEstadoSoporte() {
         return estadoSoporte;
     }
-    public void setEstadoSoporte(boolean estadoSoporte) {
+    public void setEstadoSoporte(Boolean estadoSoporte) {
         this.estadoSoporte = estadoSoporte;
     }
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
     
+   public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+    
+    public String getApellidoEmpleado() {
+        return apellidoEmpleado;
+    }
+    public void setApellidoEmpleado(String apellidoEmpleado) {
+        this.apellidoEmpleado = apellidoEmpleado;
+    }
 }

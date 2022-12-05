@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Conexion;
+import model.horarioRegistrado.horarioReVo;
 
 public class asigHorarioDao {
     
@@ -67,6 +68,37 @@ public class asigHorarioDao {
 
         return asigHorarios;
     }
+    
+        //LISTAR POR ID 
+    
+    public List<asigHorarioVo> listarId(int idEmpleado) throws SQLException{
+        List<asigHorarioVo> asigHorarios =new ArrayList<>();
+        sql = "SELECT * FROM horarioRegistrado WHERE idEmpleado="+idEmpleado;
+        try {
+ con=Conexion.conectar();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery(sql);
+            while(rs.next()){
+                asigHorarioVo filas=new asigHorarioVo();
+                //Escribir  en el setter cada valor encontrado
+                filas.setIdHorarioAsignado(rs.getInt("idHorarioAsignado"));
+                filas.setHoraEntradaAsignada(rs.getString("horaEntradaAsignada"));
+                filas.setHoraSalidaAsignada(rs.getString("horaSalidaAsignada"));
+                filas.setEstadoHorario(rs.getBoolean("estadoHorario"));
+                asigHorarios.add(filas);
+            }
+            ps.close();
+            System.out.println("consulta exitosa");
+            } catch (Exception e) {
+                System.out.println("La consulta no se pudo ejecutar "+e.getMessage().toString());
+            }
+            finally{
+                con.close();
+            }
+    
+            return asigHorarios;
+        }
+
 
      //Eliminar 
      public void eliminar (int idHorarioAsignado) throws SQLException {

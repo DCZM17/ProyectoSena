@@ -1,6 +1,7 @@
 package model.horarioRegistrado;
 
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Conexion;
+
 public class horarioReDao {
     
     Connection con;
@@ -16,10 +18,51 @@ public class horarioReDao {
     ResultSet rs;
     String sql = null;
     int filas;
+    int s;
 
     public List<horarioReVo> listar() throws SQLException{
         List<horarioReVo> horarioRegistrado = new ArrayList<>();
-        sql = "SELECT * FROM horarioRegistrado";
+        sql = "SELECT a.idHorarioRegistrado, a.horaEntradaRegistrada, a.horaSalidaRegistrada, a.horaInicioAlmuerzo, a.horaFinAlmuerzo, a.fechaRegistro, a.estadoHorarioRegistrado, a.idEmpleadoH, e.nombreEmpleado, e.apellidoEmpleado FROM horarioRegistrado a INNER JOIN empleado e ON a.idEmpleadoH = e.idEmpleado;";
+        try {
+            con = Conexion.conectar();
+            ps = con.prepareStatement(sql);
+            System.out.println(ps);
+            rs = ps.executeQuery(sql);
+                
+                while (rs.next()) {
+                    horarioReVo filas = new horarioReVo();
+                    
+                    filas.setIdHorarioRegistrado(rs.getInt("idHorarioRegistrado"));
+                    filas.setHoraEntradaRegistrada(rs.getString("horaEntradaRegistrada"));
+                    filas.setHoraSalidaRegistrada(rs.getString("horaSalidaRegistrada"));
+                    filas.setHoraInicioAlmuerzo(rs.getString("horaInicioAlmuerzo"));
+                    filas.setHoraFinAlmuerzo(rs.getString("horaFinAlmuerzo"));
+                    filas.setFechaRegistro(rs.getString("fechaRegistro"));
+                    filas.setEstadoHorarioRegistrado(rs.getInt("estadoHorarioRegistrado"));
+                    filas.setIdEmpleadoH(rs.getInt("idEmpleadoH"));
+                    filas.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                    filas.setApellidoEmpleado(rs.getString("apellidoEmpleado"));
+
+                    horarioRegistrado.add(filas);
+                    
+                }
+                ps.close();
+                System.out.println("consulta exitosa");
+            } catch (Exception e) {
+                System.out.println("La consulta no se pudo ejecutar "+e.getMessage().toString());
+            }
+            finally{
+                con.close();
+            }
+    
+            return horarioRegistrado;
+        }
+    
+    //LISTAR POR ID 
+    
+    public List<horarioReVo> listarId(int idEmpleado) throws SQLException{
+        List<horarioReVo> horarioRegistrado = new ArrayList<>();
+        sql = "SELECT a.idHorarioRegistrado, a.horaEntradaRegistrada, a.horaSalidaRegistrada, a.horaInicioAlmuerzo, a.horaFinAlmuerzo, a.fechaRegistro, a.estadoHorarioRegistrado, a.idEmpleadoH, e.nombreEmpleado, e.apellidoEmpleado FROM horarioRegistrado a INNER JOIN empleado e ON a.idEmpleadoH = e.idEmpleado WHERE e.idEmpleado="+idEmpleado;
         try {
             con = Conexion.conectar();
             ps = con.prepareStatement(sql);
@@ -35,6 +78,9 @@ public class horarioReDao {
                     filas.setHoraFinAlmuerzo(rs.getString("horaFinAlmuerzo"));
                     filas.setFechaRegistro(rs.getString("fechaRegistro"));
                     filas.setEstadoHorarioRegistrado(rs.getInt("estadoHorarioRegistrado"));
+                    filas.setIdEmpleadoH(rs.getInt("idEmpleadoH"));
+                    filas.setNombreEmpleado(rs.getString("nombreEmpleado"));
+                    filas.setApellidoEmpleado(rs.getString("apellidoEmpleado"));
 
                     horarioRegistrado.add(filas);
                 }
@@ -52,12 +98,13 @@ public class horarioReDao {
 
         //AGREGAR
     public int add(horarioReVo horarioRegistrado) throws SQLException{
-        sql="INSERT INTO horarioRegistrado (horaEntradaRegistrada, estadoHorarioRegistrado) values(?,?)";
+        sql="INSERT INTO horarioRegistrado (horaEntradaRegistrada, estadoHorarioRegistrado, idEmpleadoH) values(?,?,?)";
         try{
             con=Conexion.conectar(); //abrir conexión
             ps=con.prepareStatement(sql); //preparar sentencia
             ps.setString(1, horarioRegistrado.getHoraEntradaRegistrada());
             ps.setInt(2, horarioRegistrado.getEstadoHorarioRegistrado());
+            ps.setInt(3, horarioRegistrado.getIdEmpleadoH());
             System.out.println(ps);
             ps.executeUpdate(); //Ejecutar sentencia
             ps.close(); //cerrar sentencia

@@ -1,10 +1,19 @@
 package model.login;
 
 public class loginVo {
+    private int idUsuario;
     private String correoUsuario;
     private String contrasenaUsuario;
     private String rolUsuario;
 
+    public int getIdUsuario(){
+        return idUsuario;
+    }
+    
+    public void setIdUsuario(int idUsuario){
+        this.idUsuario = idUsuario;
+    }
+    
     public String getCorreoUsuario() {
         return correoUsuario;
     }

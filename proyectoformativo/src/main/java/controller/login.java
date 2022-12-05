@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 import model.login.loginVo;
 import model.login.loginDao;
 
+import model.empleado.empleadoVo;
+import model.empleado.empleadoDao;
+
 public class login extends HttpServlet {
 
     public login() {
@@ -30,52 +33,71 @@ public class login extends HttpServlet {
     try
     {
         String userValidate = loginDao.authenticateUser(loginVo);
+        
+        String[] datosObtenidos = userValidate.split(",");
+            
+            System.out.println("mostrarte "+datosObtenidos[1]);
  
-        if(userValidate.equals("Jefe_Rol"))
+        if(datosObtenidos[2].equals("Jefe"))
         {
             System.out.println("Bienvenido Jefe");
- 
+            
+         
             HttpSession session = req.getSession(); //Creating a session
-            session.setAttribute("Jefe", correoUsuario); //setting session attribute
-            req.setAttribute("correoUsuario", correoUsuario);
+            session.setAttribute("idUsuario", datosObtenidos[0]); //dnvia la varibale de la consulta a la vista por sesion
+            session.setAttribute("nombreUsuario", datosObtenidos[3]);
+            session.setAttribute("apellidoUsuario", datosObtenidos[4]);
+            session.setAttribute("rolUsuario", datosObtenidos[2]);
+            //req.setAttribute("correoUsuario", datosObtenidos[1]);
+            
+            
  
             req.getRequestDispatcher("views/menus/menuJefe.jsp").forward(req, resp);
         }
-        else if(userValidate.equals("Supervisor_Rol"))
-        {
+        else if(datosObtenidos[2].equals("Supervisor")){
+            
             System.out.println("Bienvenido Supervisor");
  
-            HttpSession session = req.getSession();
-            session.setAttribute("Supervisor", correoUsuario);
-            req.setAttribute("correoUsuario", correoUsuario);
+            HttpSession session = req.getSession(); //Creating a session
+            session.setAttribute("idUsuario", datosObtenidos[0]); //dnvia la varibale de la consulta a la vista por sesion
+            session.setAttribute("nombreUsuario", datosObtenidos[3]);
+            session.setAttribute("apellidoUsuario", datosObtenidos[4]);
+            session.setAttribute("rolUsuario", datosObtenidos[2]);
  
             req.getRequestDispatcher("views/menus/menuSupervisor.jsp").forward(req, resp);
         }
-        else if(userValidate.equals("Conductor_Rol"))
+        else if(datosObtenidos[2].equals("Conductor"))
         {
             System.out.println("Bienvenido Conductor");
  
-            HttpSession session = req.getSession();
-            session.setAttribute("Conductor", correoUsuario);
-            req.setAttribute("correoUsuario", correoUsuario);
- 
+             HttpSession session = req.getSession(); //Creating a session
+            session.setAttribute("idUsuario", datosObtenidos[0]); //dnvia la varibale de la consulta a la vista por sesion
+            session.setAttribute("nombreUsuario", datosObtenidos[3]);
+            session.setAttribute("apellidoUsuario", datosObtenidos[4]);
+            session.setAttribute("rolUsuario", datosObtenidos[2]);
+            
             req.getRequestDispatcher("views/menus/menuConductor.jsp").forward(req, resp);
         }
-        else if(userValidate.equals("Montacarga_Rol"))
+        else if(datosObtenidos[2].equals("Montacarga"))
         {
-            System.out.println("Bienvenido Montacraga");
+            System.out.println("Bienvenido Montacarga");
  
-            HttpSession session = req.getSession();
-            session.setMaxInactiveInterval(10*60);
-            session.setAttribute("Montacarga", correoUsuario);
-            req.setAttribute("correoUsuario", correoUsuario);
- 
+             HttpSession session = req.getSession(); //Creating a session
+            session.setAttribute("idUsuario", datosObtenidos[0]); //dnvia la varibale de la consulta a la vista por sesion
+            session.setAttribute("nombreUsuario", datosObtenidos[3]);
+            session.setAttribute("apellidoUsuario", datosObtenidos[4]);
+            session.setAttribute("rolUsuario", datosObtenidos[2]);
+            
             req.getRequestDispatcher("views/menus/menuMontacarga.jsp").forward(req, resp);
         }
         else
         {
             System.out.println("Error message = "+userValidate);
             req.setAttribute("errMessage", userValidate);
+            System.out.println("Error message = "+userValidate);
+            
+            
+            
  
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }

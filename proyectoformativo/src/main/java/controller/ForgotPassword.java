@@ -55,7 +55,7 @@ public class ForgotPassword extends HttpServlet {
 				message.setFrom(new InternetAddress(email));// change accordingly
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 				message.setSubject("Codigo de verificacion");
-				message.setText("Su codigo de verificacion es: " + otpvalue);
+				message.setText("Su codigo de verificacion para cambiar su contraseña en Acarreos Gutiérrez es: " + otpvalue);
 				// Enviar mensaje
 				Transport.send(message);
 				System.out.println("Mensaje enviado correctamente");

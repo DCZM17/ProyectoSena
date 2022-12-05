@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.horarioRegistrado.horarioReDao;
 import model.horarioRegistrado.horarioReVo;
+import model.empleado.empleadoVo;
 
 public class horarioReController extends HttpServlet {
     horarioReVo r = new horarioReVo();
     horarioReDao rd = new horarioReDao();
+    empleadoVo s = new empleadoVo(); 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,6 +30,11 @@ public class horarioReController extends HttpServlet {
 
             case "gestionar":
                 listar(req, resp);
+                break;
+            
+            case "gestionarId":
+                listarId(req, resp);
+                break;
         }
     }
 
@@ -68,6 +75,21 @@ public class horarioReController extends HttpServlet {
             System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
         }
     }
+    
+    private void listarId(HttpServletRequest req, HttpServletResponse resp) {
+        
+            
+            r.setIdEmpleadoH(Integer.parseInt(req.getParameter("idUsuario")));
+        try {
+            //List <horarioReVo> horarioRList = rd.listar();
+            List<horarioReVo> horarioRList = rd.listarId(r.getIdEmpleadoH());
+            req.setAttribute("listar", horarioRList);
+            req.getRequestDispatcher("views/horarioRegistrado/horarioRegistradoList.jsp").forward(req, resp);
+            System.out.println("Datos listados correctamente");
+        } catch (Exception e) {
+            System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
+        }
+    }
 
     /*
      * private void tabla1 (HttpServletRequest req, HttpServletResponse resp) {
@@ -92,6 +114,10 @@ public class horarioReController extends HttpServlet {
         } else {
             System.out.println("No entre");
         }
+        if (req.getParameter("idEmpleado") != null) {
+            r.setIdEmpleadoH(Integer.parseInt(req.getParameter("idEmpleado")));
+        }
+        
         try {
             rd.add(r);
             System.out.println("Registro insertado correctamente");

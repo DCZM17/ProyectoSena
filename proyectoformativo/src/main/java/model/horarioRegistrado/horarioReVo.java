@@ -9,14 +9,17 @@ public class horarioReVo {
     private String horaFinAlmuerzo;
     private String fechaRegistro;
     private int estadoHorarioRegistrado;
-    //private int idEmpleadoH;
+    private int idEmpleadoH;
+    private String nombreEmpleado;
+    private String apellidoEmpleado;
 
     public horarioReVo(){
 
     }
 
     public horarioReVo(int idHorarioRegistrado, String horaEntradaRegistrada, String horaSalidaRegistrada, 
-                                String horaInicioAlmuerzo, String horaFinAlmuerzo, String fechaRegistro,int estadoHorarioRegistrado){
+                                String horaInicioAlmuerzo, String horaFinAlmuerzo, String fechaRegistro,int estadoHorarioRegistrado, int idEmpleadoH,String nombreEmpleado,
+                                String apellidoEmpleado){
 
         this.idHorarioRegistrado     = idHorarioRegistrado;
         this.horaEntradaRegistrada   = horaEntradaRegistrada;
@@ -25,7 +28,10 @@ public class horarioReVo {
         this.horaFinAlmuerzo         = horaFinAlmuerzo;
         this.fechaRegistro           = fechaRegistro;
         this.estadoHorarioRegistrado = estadoHorarioRegistrado;
-        //this.idEmpleadoH             = idEmpleadoH;
+        this.idEmpleadoH             = idEmpleadoH;
+        this.nombreEmpleado          = nombreEmpleado;
+        this.apellidoEmpleado        = apellidoEmpleado;
+        
              
     }
 
@@ -94,12 +100,27 @@ public class horarioReVo {
     }
 
     // ID EMPLEADO
-   /*  public int getIdEmpleadoH() {
+     public int getIdEmpleadoH() {
         return idEmpleadoH;
     }
 
     public void setIdEmpleadoH(int idEmpleadoH) {
         this.idEmpleadoH = idEmpleadoH;
     }
-    */
+    
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+    
+        public String getApellidoEmpleado() {
+        return apellidoEmpleado;
+    }
+
+    public void setApellidoEmpleado(String apellidoEmpleado) {
+        this.apellidoEmpleado = apellidoEmpleado;
+    }
 }

@@ -32,8 +32,14 @@ public class empleadoController extends HttpServlet {
             ingresar(req, resp);
             break;
             case "listar":
-            empleadoList(req, resp);
-            break;     
+            empleadoLiist(req, resp);
+            break;    
+            case "editar":
+            editar(req, resp);
+            break; 
+            case "listarId":
+           listarId(req, resp);
+            break;
         }
     }
 
@@ -45,6 +51,9 @@ public class empleadoController extends HttpServlet {
         switch (a) {
             case "add":
                 add(req, resp);
+                break;
+                case "edit":
+                edit(req, resp);
                 break;
         }
     }
@@ -58,6 +67,22 @@ public class empleadoController extends HttpServlet {
             System.out.println("Hay problemas");
         }
     }
+    
+    private void listarId(HttpServletRequest req, HttpServletResponse resp) {
+        
+            
+            r.setIdEmpleado(Integer.parseInt(req.getParameter("idUsuario")));
+        try {
+            //List <horarioReVo> horarioRList = rd.listar();
+            List<empleadoVo> empleadoL = rd.listarId(r.getIdEmpleado());
+            req.setAttribute("empleadoList", empleadoL);
+            req.getRequestDispatcher("views/empleado/empleadoList.jsp").forward(req, resp);
+            System.out.println("Datos listados de manera correcta");
+        } catch (Exception e) {
+            System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
+        }
+    }
+    
     private void ingresar(HttpServletRequest req, HttpServletResponse resp) {
         try {
             req.getRequestDispatcher("views/empleado/empleadoAdd.jsp").forward(req, resp);
@@ -115,16 +140,16 @@ public class empleadoController extends HttpServlet {
         try {
             rd.registrar(r, rc);
             System.out.println("Registro insertado correctamente");
-            empleadoList(req, resp);
+            empleadoLiist(req, resp);
         } catch (Exception e) {
             System.out.println("Error en la inserción del registro " + e.getMessage().toString());
         }
         
     }
 
-    private void empleadoList(HttpServletRequest req, HttpServletResponse resp) {
+    private void empleadoLiist(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            List<empleadoVo> empleadoL = rd.empleadoList();
+            List<empleadoVo> empleadoL = rd.empleadoLiist();
             req.setAttribute("empleadoList", empleadoL);
             req.getRequestDispatcher("views/empleado/empleadoList.jsp").forward(req, resp);
             System.out.println("Datos listados de manera correcta");
@@ -132,4 +157,70 @@ public class empleadoController extends HttpServlet {
             System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
         }
     }
+
+    private void editar(HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getParameter("idEmpleado") != null) {
+            r.setIdEmpleado(Integer.parseInt(req.getParameter("idEmpleado")));
+        }
+        try {
+            List<empleadoVo> empleadoL = rd.empleadoList(r.getIdEmpleado());
+            req.setAttribute("empleadoList", empleadoL);
+            req.getRequestDispatcher("views/empleado/empleadoEdit.jsp").forward(req, resp);
+            System.out.println("Datos listados correctamente");
+        } catch (Exception e) {
+            System.out.println("Hay problemas al listar los datos " + e.getMessage().toString());
+        }
+    }
+
+    private void edit(HttpServletRequest req, HttpServletResponse resp) {
+        if (req.getParameter("idUsuario") != null) {
+            r.setIdUsuario(Integer.parseInt(req.getParameter("idUsuario")));
+        }
+        if (req.getParameter("nombreEmpleado") != null) {
+            r.setNombreEmpleado(req.getParameter("nombreEmpleado"));
+        }
+
+        if (req.getParameter("apellidoEmpleado") != null) {
+            r.setApellidoEmpleado(req.getParameter("apellidoEmpleado"));
+        }
+
+        if (req.getParameter("tipoDocEmpleado") != null) {
+            r.setTipoDocEmpleado(req.getParameter("tipoDocEmpleado"));
+        }
+        if (req.getParameter("docEmpleado") != null) {
+            r.setDocEmpleado(req.getParameter("docEmpleado"));
+        }
+        if (req.getParameter("celularEmpleado") != null) {
+            r.setCelularEmpleado(req.getParameter("celularEmpleado"));
+        }
+        if (req.getParameter("direccionEmpleado") != null) {
+            r.setDireccionEmpleado(req.getParameter("direccionEmpleado"));
+        }
+        if (req.getParameter("correoUsuario") != null) {
+            r.setCorreoEmpleado(req.getParameter("correoUsuario"));
+        }
+        if (req.getParameter("contrasenaUsuario") != null) {
+            r.setContrasenaUsuario(req.getParameter("contrasenaUsuario"));
+        }
+        if (req.getParameter("rolUsuario") != null) {
+            r.setRolUsuario(req.getParameter("rolUsuario"));
+        }
+        if (req.getParameter("estadoUsuario") != null) {
+            r.setEstadoUsuario(true);
+        }
+        else {
+            r.setEstadoUsuario(false);
+        }
+        try {
+            rd.actualizar(r);
+            System.out.println("El horario ha sido editado correctamente");
+            empleadoLiist(req, resp);
+        } catch (Exception e) {
+            System.out.println("Error no se edito el registro " + e.getMessage().toString());
+        }
+    }
+
+
+
+
 }

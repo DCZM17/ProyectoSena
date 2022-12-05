@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.horarioAsignado.asigHorarioDao;
 import model.horarioAsignado.asigHorarioVo;
+import model.horarioRegistrado.horarioReVo;
 
 public class horarioAsigController extends HttpServlet {
 

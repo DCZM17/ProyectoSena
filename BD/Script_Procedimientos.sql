@@ -27,30 +27,32 @@ SET letraN = UPPER(LEFT(_nombreEmpleado,1) );
 SET letraA1 = LOWER(LEFT(_apellidoEmpleado,1) );
 SET contrasenaUsuario = CONCAT (digitos,letraN,'-',letraA1); 
     INSERT INTO Usuario (correoUsuario,contrasenaUsuario,  rolUsuario, estadoUsuario) VALUES(_correoUsuario,contrasenaUsuario,  _rolUsuario, _estadoUsuario);
-    INSERT INTO Empleado (tipoDocEmpleado,docEmpleado, nombreEmpleado, apellidoEmpleado, celularEmpleado, direccionEmpleado,fotoEmpleado,idHorarioAsignado,idUsuario) VALUES(_tipoDocEmpleado, _docEmpleado, _nombreEmpleado, _apellidoEmpleado, _celularEmpleado, _direccionEmpleado,_fotoEmpleado,_idHorarioAsignado, (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
+    INSERT INTO Empleado (tipoDocEmpleado,docEmpleado, nombreEmpleado, apellidoEmpleado, celularEmpleado, direccionEmpleado,fotoEmpleado,idHorarioAsignado,idUsuario) 
+    VALUES(_tipoDocEmpleado, _docEmpleado, _nombreEmpleado, _apellidoEmpleado, _celularEmpleado, _direccionEmpleado,_fotoEmpleado,_idHorarioAsignado, 
+    (SELECT idUsuario FROM usuario ORDER BY idUsuario DESC LIMIT 1));
 END//
 DELIMITER //
-
-CALL add_Empleado('ducadianis1@hotmail.com','Conductor',TRUE,'CC',1019038350,'Diana','Reyes','3134470215','carrera 82 # 39a 14','5');
 
 /*Proceimiento Actualizar*/
 DELIMITER //
 CREATE PROCEDURE edit_Empleado(
 IN _idUsuario INT,
-IN _correoUsuario VARCHAR(30),
-IN _rolUsuario VARCHAR(30),
-IN _estadoUsuario BOOLEAN,
-IN _tipoDocEmpleado VARCHAR(30),
-IN _docEmpleado VARCHAR(30),
 IN _nombreEmpleado VARCHAR(30),
 IN _apellidoEmpleado VARCHAR(30),
+IN _tipoDocEmpleado VARCHAR(30),
+IN _docEmpleado VARCHAR(30),
 IN _celularEmpleado VARCHAR (15),
 IN _direccionEmpleado VARCHAR(100),
-IN _idEmpleado INTEGER 
+IN _correoUsuario VARCHAR(30),
+IN _contrasenaUsuario VARCHAR(30),
+IN _rolUsuario VARCHAR(30),
+IN _estadoUsuario BOOLEAN
+
 )
 BEGIN
     UPDATE Usuario SET 
     correoUsuario = _correoUsuario,
+    contrasenaUsuario = _contrasenaUsuario,
     rolUsuario = _rolUsuario,
     estadoUsuario = _estadoUsuario
     WHERE idUsuario = _idUsuario;
@@ -61,24 +63,5 @@ BEGIN
     apellidoEmpleado = _apellidoEmpleado,
     celularEmpleado =  _celularEmpleado,
     direccionEmpleado = _direccionEmpleado
-    WHERE idEmpleado = _idEmpleado;
+    WHERE docEmpleado = _docEmpleado;
 END//
-
-/*Procedimiento eliminar*/ 
-DELIMITER //
-CREATE PROCEDURE delete_Empleado(
-IN _idEmpleado INT,
-IN _idUsuario INT
-)BEGIN
-DELETE FROM Empleado WHERE idEmpleado = _idEmpleado;
-DELETE FROM Usuario WHERE idUsuario = _idUsuario;
-END//
-
-CALL delete_Empleado ('1','1');
-
-/*Consulta multitabla*/
-SELECT Usuario.idUsuario, Empleado.nombreEmpleado, Empleado.apellidoEmpleado,Empleado.docEmpleado, Usuario.correoUsuario, Usuario.estadoUsuario 
-FROM Usuario
-INNER JOIN Empleado ON Usuario.idUsuario=Empleado.idUsuario;
-SELECT * FROM USUARIO;
-SELECT * FROM EMPLEADO;
